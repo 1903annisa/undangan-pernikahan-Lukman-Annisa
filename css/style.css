@@ -106,3 +106,24 @@
         height: 280px !important;
     }
 }
+
+@media screen and (max-width: 640px) {
+  .map-responsive {
+    display: block !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    width: 90% !important;
+    height: 280px !important;
+    overflow: hidden !important;
+    margin: 20px auto !important;
+  }
+
+  .map-responsive iframe {
+    display: block !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    width: 100% !important;
+    height: 280px !important;
+    border: 0 !important;
+  }
+}
