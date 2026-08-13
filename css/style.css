@@ -82,7 +82,7 @@
   object-fit: cover;
 }
 
-..map-responsive {
+.map-responsive {
     width: 80%;
     max-width: 800px;
     margin: 20px auto;
