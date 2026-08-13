@@ -81,3 +81,28 @@
   height: 100vh;
   object-fit: cover;
 }
+
+..map-responsive {
+    width: 80%;
+    max-width: 800px;
+    margin: 20px auto;
+    overflow: hidden;
+    border-radius: 20px;
+}
+
+.map-responsive iframe {
+    width: 100% !important;
+    height: 400px !important;
+    border: 0 !important;
+    display: block;
+}
+
+@media (max-width: 600px) {
+    .map-responsive {
+        width: 90%;
+    }
+
+    .map-responsive iframe {
+        height: 280px !important;
+    }
+}
