@@ -478,24 +478,38 @@
         </div>
         <div class="col-md-10 col-12 mx-2" data-aos="zoom-in" data-aos-duration="1300" data-aos-delay="2500">
           <div class="card bg-fee rounded-3 p-3">
-            <form action="" method="post">
-              <div class="mb-3">
-                <input type="text" name="nama" placeholder="Nama" class="form-control" required />
-              </div>
-              <div class="mb-3">
-                <textarea name="ucapan" placeholder="Ucapan" rows="4" class="form-control" required></textarea>
-              </div>
-              <div class="mb-3">
-                <select name="konfirmasi" class="form-select" required>
-                  <option disabled selected>Konfirmasi Kehadiran</option>
-                  <option value="Hadir">Hadir</option>
-                  <option value="Tidak Hadir">Tidak Hadir</option>
-                </select>
-              </div>
-              <div class="mb-3 text-start">
-                <button type="submit" class="btn bg-berem btn-outline-secondary text-white">Kirim</button>
-              </div>
-            </form>
+
+           <!-- Bagian untuk menampilkan daftar ucapan yang masuk -->
+<div class="col-md-10 col-12 mx-2 mt-4" data-aos="zoom-in" data-aos-duration="1300" data-aos-delay="2700">
+  <div class="card bg-fee rounded-3 p-3 shadow-sm">
+    <!-- Judul disamakan gaya dan posisinya -->
+    <h5 class="mb-3 text-center font-dancing fs-40">Daftar Ucapan</h5>
+    
+    <!-- Container list ucapan dengan batasan tinggi dan scroll yang rapi -->
+    <div id="list-ucapan" style="max-height: 400px; overflow-y: auto; font-family: sans-serif;">
+      <p class="text-muted text-center py-3">Memuat ucapan...</p>
+    </div>
+  </div>
+</div>
+
+           <form id="form-ucapan" action="" method="post">
+  <div class="mb-3">
+    <input type="text" id="nama" name="nama" placeholder="Nama" class="form-control" required />
+  </div>
+  <div class="mb-3">
+    <textarea id="ucapan" name="ucapan" placeholder="Ucapan" rows="4" class="form-control" required></textarea>
+  </div>
+  <div class="mb-3">
+    <select id="konfirmasi" name="konfirmasi" class="form-select" required>
+      <option disabled selected>Konfirmasi Kehadiran</option>
+      <option value="Hadir">Hadir</option>
+      <option value="Tidak Hadir">Tidak Hadir</option>
+    </select>
+  </div>
+  <div class="mb-3 text-start">
+    <button type="submit" id="btn-kirim" class="btn bg-berem btn-outline-secondary text-white">Kirim</button>
+  </div>
+</form>
           </div>
         </div>
       </div>
@@ -573,6 +587,101 @@
       once: true,
     });
   </script>
+
+  <script>
+  // Ganti dengan URL Web App Exec Apps Script kamu
+  const urlAppsScript = "https://script.google.com/macros/s/AKfycbynd1V5AgX3XevgTCtf3cMW3fUr8ntTEiRbOEboIqNcJKlRjCJmjFGG5jOHTC_gn3I9yw/exec";
+
+  // 1. Fungsi untuk mengambil dan menampilkan data ucapan dari Spreadsheet
+  function muatUcapan() {
+    fetch(urlAppsScript)
+      .then(response => response.json())
+      .then(data => {
+        const container = document.getElementById("list-ucapan");
+        container.innerHTML = "";
+
+        if (data.length === 0) {
+          container.innerHTML = '<p class="text-muted text-center">Belum ada ucapan.</p>';
+          return;
+        }
+
+        // Balik urutan agar ucapan terbaru berada di paling atas
+        data.reverse();
+
+        data.forEach(item => {
+          // Tentukan warna badge untuk status konfirmasi
+          let badgeColor = item.konfirmasi === "Hadir" ? "bg-success" : "bg-danger";
+
+          const cardItem = `
+            <div class="border-bottom pb-2 mb-3">
+              <div class="d-flex justify-content-between align-items-center">
+                <h6 class="mb-0 fw-bold">${escapeHtml(item.nama)}</h6>
+                <span class="badge ${badgeColor}" style="font-size: 0.75rem;">${escapeHtml(item.konfirmasi)}</span>
+              </div>
+              <p class="mb-0 mt-1 text-secondary" style="font-size: 0.95rem; white-space: pre-line;">${escapeHtml(item.ucapan)}</p>
+            </div>
+          `;
+          container.innerHTML += cardItem;
+        });
+      })
+      .catch(error => {
+        console.error("Gagal memuat data:", error);
+        document.getElementById("list-ucapan").innerHTML = '<p class="text-danger text-center">Gagal memuat ucapan.</p>';
+      });
+  }
+
+  // 2. Fungsi untuk menangani saat form disubmit
+  const form = document.getElementById("form-ucapan");
+  if (form) {
+    form.addEventListener("submit", function(e) {
+      e.preventDefault();
+
+      const btnKirim = document.getElementById("btn-kirim");
+      btnKirim.disabled = true;
+      btnKirim.innerText = "Mengirim...";
+
+      const formData = {
+        nama: document.getElementById("nama").value,
+        ucapan: document.getElementById("ucapan").value,
+        konfirmasi: document.getElementById("konfirmasi").value
+      };
+
+      fetch(urlAppsScript, {
+        method: "POST",
+        mode: "no-cors", // Wajib agar tidak terblokir kebijakan CORS Google
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify(formData)
+      })
+      .then(() => {
+        alert("Terima kasih! Ucapan Anda berhasil terkirim.");
+        form.reset();
+        btnKirim.disabled = false;
+        btnKirim.innerText = "Kirim";
+        
+        // Refresh daftar ucapan setelah 1.5 detik agar data baru muncul
+        setTimeout(muatUcapan, 1500);
+      })
+      .catch(error => {
+        console.error("Error:", error);
+        alert("Terjadi kesalahan saat mengirim ucapan.");
+        btnKirim.disabled = false;
+        btnKirim.innerText = "Kirim";
+      });
+    });
+  }
+
+  // Fungsi pengaman kecil untuk teks HTML
+  function escapeHtml(text) {
+    if (!text) return "";
+    return text.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+  }
+
+  // Jalankan fungsi saat halaman pertama kali dibuka
+  muatUcapan();
+</script>
+
 </body>
 
 </html>
