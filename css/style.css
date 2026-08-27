@@ -127,3 +127,10 @@
     border: 0 !important;
   }
 }
+
+#nama {
+    font-family: "Playfair Display", Georgia, serif;
+    font-weight: 400;
+    font-size: 1.4em;
+    letter-spacing: 0.5px;
+}
