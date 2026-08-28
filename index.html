@@ -479,49 +479,51 @@
         <div class="col-md-10 col-12 mx-2" data-aos="zoom-in" data-aos-duration="1300" data-aos-delay="2500">
           <div class="card bg-fee rounded-3 p-3">
 
-           <!-- FORM UCAPAN -->
-<form id="form-ucapan" action="" method="post">
-  <div class="mb-3">
-    <input type="text" id="nama" name="nama" placeholder="Nama" class="form-control" required />
-  </div>
+            <!-- FORM UCAPAN -->
+            <form id="form-ucapan" action="" method="post">
+              <div class="mb-3">
+                <input type="text" id="nama" name="nama" placeholder="Nama" class="form-control" required />
+              </div>
 
-  <div class="mb-3">
-    <textarea id="ucapan" name="ucapan" placeholder="Ucapan" rows="4" class="form-control" required></textarea>
-  </div>
+              <div class="mb-3">
+                <textarea id="ucapan" name="ucapan" placeholder="Ucapan" rows="4" class="form-control" required></textarea>
+              </div>
 
-  <div class="mb-3">
-    <select id="konfirmasi" name="konfirmasi" class="form-select" required>
-      <option disabled selected>Konfirmasi Kehadiran</option>
-      <option value="Hadir">Hadir</option>
-      <option value="Tidak Hadir">Tidak Hadir</option>
-    </select>
-  </div>
+              <div class="mb-3">
+                <select id="konfirmasi" name="konfirmasi" class="form-select" required>
+                  <option disabled selected>Konfirmasi Kehadiran</option>
+                  <option value="Hadir">Hadir</option>
+                  <option value="Tidak Hadir">Tidak Hadir</option>
+                </select>
+              </div>
 
-  <div class="mb-3 text-start">
-    <button type="submit" id="btn-kirim" class="btn bg-berem btn-outline-secondary text-white">
-      Kirim
-    </button>
-  </div>
-</form>
+              <div class="mb-3 text-start">
+                <button type="submit" id="btn-kirim" class="btn bg-berem btn-outline-secondary text-white">
+                  Kirim
+                </button>
+              </div>
+            </form>
 
+            <!-- DAFTAR UCAPAN -->
+            <div class="col-12 mt-5" data-aos="zoom-in" data-aos-duration="1300" data-aos-delay="2700">
+              <div class="card bg-fee rounded-3 p-3 shadow-sm">
+                <h5 class="mb-3 text-center font-dancing fs-40">
+                  Daftar Ucapan
+                </h5>
+                <div id="list-ucapan" style="max-height: 400px; overflow-y: auto; font-family: sans-serif;">
+                  <p class="text-muted text-center py-3">
+                    Memuat ucapan...
+                  </p>
+                </div>
+              </div>
+            </div> 
 
-<!-- DAFTAR UCAPAN -->
-<div class="col-12 mt-5" data-aos="zoom-in" data-aos-duration="1300" data-aos-delay="2700">
-  <div class="card bg-fee rounded-3 p-3 shadow-sm">
-
-    <h5 class="mb-3 text-center font-dancing fs-40">
-      Daftar Ucapan
-    </h5>
-
-    <div id="list-ucapan" style="max-height: 400px; overflow-y: auto; font-family: sans-serif;">
-      <p class="text-muted text-center py-3">
-        Memuat ucapan...
-      </p>
+          </div> <!-- <--- INI PENUTUP CARD UTAMA (WISHES & FORM) YANG SELAMA INI LUPA! -->
+        </div> 
+      </div>
     </div>
-
-  </div>
-</div>
-  <!-- salam start -->
+  </section>
+  <!-- Ucapan end -->
   <section class="bg-wakwak">
     <div class="container py-5">
       <div class="row text-center justify-content-center">
