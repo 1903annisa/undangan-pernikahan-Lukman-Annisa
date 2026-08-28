@@ -479,26 +479,16 @@
         <div class="col-md-10 col-12 mx-2" data-aos="zoom-in" data-aos-duration="1300" data-aos-delay="2500">
           <div class="card bg-fee rounded-3 p-3">
 
-           <!-- Bagian untuk menampilkan daftar ucapan yang masuk -->
-<div class="col-md-10 col-12 mx-2 mt-4" data-aos="zoom-in" data-aos-duration="1300" data-aos-delay="2700">
-  <div class="card bg-fee rounded-3 p-3 shadow-sm">
-    <!-- Judul disamakan gaya dan posisinya -->
-    <h5 class="mb-3 text-center font-dancing fs-40">Daftar Ucapan</h5>
-    
-    <!-- Container list ucapan dengan batasan tinggi dan scroll yang rapi -->
-    <div id="list-ucapan" style="max-height: 400px; overflow-y: auto; font-family: sans-serif;">
-      <p class="text-muted text-center py-3">Memuat ucapan...</p>
-    </div>
-  </div>
-</div>
-
-           <form id="form-ucapan" action="" method="post">
+           <!-- FORM UCAPAN -->
+<form id="form-ucapan" action="" method="post">
   <div class="mb-3">
     <input type="text" id="nama" name="nama" placeholder="Nama" class="form-control" required />
   </div>
+
   <div class="mb-3">
     <textarea id="ucapan" name="ucapan" placeholder="Ucapan" rows="4" class="form-control" required></textarea>
   </div>
+
   <div class="mb-3">
     <select id="konfirmasi" name="konfirmasi" class="form-select" required>
       <option disabled selected>Konfirmasi Kehadiran</option>
@@ -506,16 +496,31 @@
       <option value="Tidak Hadir">Tidak Hadir</option>
     </select>
   </div>
+
   <div class="mb-3 text-start">
-    <button type="submit" id="btn-kirim" class="btn bg-berem btn-outline-secondary text-white">Kirim</button>
+    <button type="submit" id="btn-kirim" class="btn bg-berem btn-outline-secondary text-white">
+      Kirim
+    </button>
   </div>
 </form>
-          </div>
-        </div>
-      </div>
+
+
+<!-- DAFTAR UCAPAN -->
+<div class="col-12 mt-5" data-aos="zoom-in" data-aos-duration="1300" data-aos-delay="2700">
+  <div class="card bg-fee rounded-3 p-3 shadow-sm">
+
+    <h5 class="mb-3 text-center font-dancing fs-40">
+      Daftar Ucapan
+    </h5>
+
+    <div id="list-ucapan" style="max-height: 400px; overflow-y: auto; font-family: sans-serif;">
+      <p class="text-muted text-center py-3">
+        Memuat ucapan...
+      </p>
     </div>
-  </section>
-  <!-- Ucapan end -->
+
+  </div>
+</div>
   <!-- salam start -->
   <section class="bg-wakwak">
     <div class="container py-5">
